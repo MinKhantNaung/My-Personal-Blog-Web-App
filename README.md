@@ -26,4 +26,5 @@ This web app is for posting personal posts and you can also show personal portfo
 - can search filter by categories or name.
 - can manage own profile and password.
 - can like, dislike and comment posts.
+- I write like-dislike system with jquery-ajax except comment system (someday, I will write with jquery-ajax or API)
 
