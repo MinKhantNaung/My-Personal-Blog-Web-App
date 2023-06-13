@@ -7,7 +7,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
                     <hr class="mt-5 mt-sm-0">
-                    <h4 class="mt-5">Create Project
+                    <h4 class="mt-5">Create Post
                         <a href="{{ route('posts.index') }}" class="btn btn-secondary btn-sm float-end"><< back</a>
                     </h4>
                     <form action="{{ route('posts.create') }}" method="POST" enctype="multipart/form-data">
