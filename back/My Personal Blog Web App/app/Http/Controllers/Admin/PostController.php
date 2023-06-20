@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $posts = Post::latest()->paginate(4);
 
         $posts->appends(request()->all());
@@ -19,17 +20,19 @@ class PostController extends Controller
     }
 
     // to create posts page
-    public function create() {
+    public function create()
+    {
         $categories = Category::all();
 
         return view('admin-panel.posts.create', compact('categories'));
     }
 
     // to create posts
-    public function createPosts(Request $request) {
+    public function createPosts(Request $request)
+    {
         $request->validate([
             'category_id' => 'required',
-            'image' => 'required|file|image|mimes:jpg,jpeg,png,svg,webp',
+            'image' => 'required|file|max:10000|image|mimetypes:image/jpg,image/jpeg,image/png,image/svg,image/webp',
             'title' => 'required|unique:posts,title',
             'content' => 'required|min:100',
         ]);
@@ -48,14 +51,16 @@ class PostController extends Controller
     }
 
     // to posts detail page
-    public function detail($id) {
+    public function detail($id)
+    {
         $post = Post::find($id);
 
         return view('admin-panel.posts.detail', compact('post'));
     }
 
     // to edit posts page
-    public function edit($id) {
+    public function edit($id)
+    {
         $post = Post::find($id);
         $categories = Category::all();
 
@@ -63,10 +68,11 @@ class PostController extends Controller
     }
 
     // to update post
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $request->validate([
             'category_id' => 'required',
-            'image' => 'file|image|mimes:jpg,jpeg,png,webp,svg',
+            'image' => 'file|max:10000|image|mimetypes:image/jpg,image/jpeg,image/png,image/webp,image/svg',
             'title' => 'required|unique:posts,title,' . $id,
             'content' => 'required|min:100',
         ]);
@@ -95,7 +101,8 @@ class PostController extends Controller
     }
 
     // to delete post
-    public function delete($id) {
+    public function delete($id)
+    {
         $post = Post::find($id);
 
         Storage::delete('public/post_images/' . $post->image);
@@ -111,7 +118,8 @@ class PostController extends Controller
         return view('admin-panel.posts.comment', compact('post'));
     }
 
-    public function showHide($id) {
+    public function showHide($id)
+    {
         $comment = Comment::find($id);
 
         if ($comment->status == 'show') {
